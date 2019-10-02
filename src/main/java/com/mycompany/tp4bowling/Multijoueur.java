@@ -13,14 +13,19 @@ public class Multijoueur implements MultiPlayerGame {
     private int nbJoueurs ;
     private String[] tabJoueurs ;  //tableau contenant le nom des joueurs
     private int numTour ;
-    private int numBoule ;
+    private int numBoule ;      //=1 ou 2
+    //création tableau pour SinglePlayerGame
+    //taille tu tab = nbJoueurs
+    private String[] tabUnJoueur ;
+    
+    private SinglePlayerGame joueurCourant ;
     
     @Override
     public String startNewGame(String[] playerName) throws Exception {
         nbJoueurs = playerName.length;
         
         tabJoueurs = playerName ;
-        if (nbJoueurs == 0)
+        if (nbJoueurs == 0 || playerName==null)
             throw new Exception("Il faut qu'il y ai au moins un joueur.");
         
         String nomJoueur = playerName[0];
@@ -28,9 +33,20 @@ public class Multijoueur implements MultiPlayerGame {
         numBoule = 1;
         
         indiceJoueurCourant = 1 ;
+        
+        
+        
+        //Créer des SinglePlayerGame
+        for (int i = 0;i<=nbJoueurs;i++){
+            String chaineNom = "joueur"+(i+1);
+            tabUnJoueur[i] = chaineNom;
+        }
+        
+        //Affichage du message
         String phraseAAfficher = "Prochain tir : joueur " + nomJoueur + ", tour n° " + numTour + ", boule n° " + numBoule;
         numBoule++;
         return phraseAAfficher;
+        
     }
 
     @Override

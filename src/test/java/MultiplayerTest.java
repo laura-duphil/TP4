@@ -19,22 +19,36 @@ import static org.junit.Assert.*;
  */
 public class MultiplayerTest {
     private Multijoueur game;
-    static String[] tabJoueurs = { "John", "Paul", "Georges", "Ringo" };
+    
     public MultiplayerTest() {
     }
     
     @BeforeClass
     public static void setUpClass() {
-        game = new MultiPlayerGame() {};
+        MultiPlayerGame game = new Multijoueur() {};
     }
     
     @AfterClass
     public static void tearDownClass() {
     }
     
+    /**
+     * Le premier joueur fait un strike
+     * le joueur suivant marque 0 points
+     * @throws Exception 
+     */
     @Test
-    public void setUp() {
-        game = new startNewGame(tabJoueurs);
+    public void testUnStrikeUnZeroPt() throws Exception {
+        String[] tabJoueurs = { "John", "Paul", "Georges", "Ringo" };
+        game.startNewGame(tabJoueurs);
+        for (int i = 0; i < 10; i++) {
+            //john fait un strike
+            game.lancer(10);
+            //paul fait 0 points dans son tour
+            game.lancer(0);
+            game.lancer(0);
+            
+        }
     }
     
     @After
